@@ -2,15 +2,17 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useState } from "react";
 import { AutoComplete, Input } from "antd";
-import dataSource from "./dataSource";
+import { useSelector } from "react-redux";
 
 function App() {
+  const addresses = useSelector((state) => state.allAddresses.addresses);
+
   const [city, setCity] = useState("");
   const [country, setCountry] = useState(0.0);
   const [options, setOptions] = useState([]);
 
   const onSearch = (val) => {
-    let filtered = dataSource.filter(
+    let filtered = addresses.filter(
       (obj) => obj.key !== 0 && obj.value.toString().toLowerCase().includes(val)
     );
     setOptions(filtered);
